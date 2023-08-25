@@ -38,6 +38,25 @@ JWT_SECRET=XXXXXXXXXX
 JWT_ALGO=HS256
 ```
 
+También es importante revisar la configuración de auth.php para que utilice el driver de JWT y el Guard de "api".
+
+```php
+  'defaults' => [
+    'guard' => 'api',
+    'passwords' => 'users',
+  ],
+  'guards' => [
+    'web' => [
+      'driver' => 'session',
+      'provider' => 'users',
+    ],
+    'api' => [
+      'driver' => 'jwt',
+      'provider' => 'users',
+    ]
+  ],
+```
+
 ## IDE Helper
 
 IDE Helper nos ayuda con el autocompletado de los modelos.
