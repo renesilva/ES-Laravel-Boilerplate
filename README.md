@@ -19,8 +19,24 @@ El sistema cuenta con los siguientes paquetes
 
 ## Correr composer
 
+Debe correr el siguiente comando para instalar las dependencias de composer.
+
 ```bash
 composer install
+```
+
+## Configuración de .env
+
+Debemos copiar el archivo `.env.example` a `.env`. Una vez copiado podemos generar la llave de la aplicación.
+
+```bash
+php artisan key:generate
+```
+
+Recordemos que cada edición del archivo .env debe estar seguida por config:cache.
+
+```bash
+php artisan config:cache
 ```
 
 ## Base de datos y Seeds
@@ -28,13 +44,28 @@ composer install
 Crear la base de datos y configurar el archivo .env con los datos de la base de datos.
 Después debes correr las migraciones y los seeds.
 
+```
+DB_DATABASE=BASEDEDATOS
+DB_USERNAME=USUARIO
+DB_PASSWORD=PASSWORD
+```
+
+```bash
+php artisan config:cache
+```
+
+Migramos la base de datos e instalamos los seeds.
+
 ```bash
 php artisan migrate
 ```
 
 ```bash
 php artisan db:seed --class=UsersSeeder
-php artisan db:seed --class=SupplierSeeder
+```
+
+```bash
+php artisan db:seed --class=SuppliersSeeder
 ```
 
 ## JWT
@@ -52,7 +83,11 @@ JWT_SECRET=XXXXXXXXXX
 JWT_ALGO=HS256
 ```
 
-También es importante revisar la configuración de auth.php para que utilice el driver de JWT y el Guard de "api".
+```bash
+php artisan config:cache
+```
+
+Recordemos que la configuración de auth.php que utilice el driver de JWT y el Guard de "api".
 
 ```php
   'defaults' => [
