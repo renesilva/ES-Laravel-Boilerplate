@@ -23,6 +23,20 @@ El sistema cuenta con los siguientes paquetes
 composer install
 ```
 
+## Base de datos y Seeds
+
+Crear la base de datos y configurar el archivo .env con los datos de la base de datos.
+Después debes correr las migraciones y los seeds.
+
+```bash
+php artisan migrate
+```
+
+```bash
+php artisan db:seed --class=UsersSeeder
+php artisan db:seed --class=SupplierSeeder
+```
+
 ## JWT
 
 Para habilitar JWT se debe correr el siguiente comando para generar el secret key.
@@ -55,6 +69,14 @@ También es importante revisar la configuración de auth.php para que utilice el
       'provider' => 'users',
     ]
   ],
+```
+
+## Corriendo el proyecto
+
+Para ejecutar proyecto debes correr el siguiente comando:
+
+```bash
+php artisan serve
 ```
 
 ## IDE Helper
