@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\BusinessController;
 use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
@@ -35,4 +36,5 @@ Route::controller(AuthController::class)->group(function () {
 
 Route::group(['middleware' => 'auth:api'], function () {
   Route::resource('suppliers', SupplierController::class);
+  Route::resource('businesses', BusinessController::class);
 });
