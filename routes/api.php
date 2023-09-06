@@ -37,4 +37,5 @@ Route::controller(AuthController::class)->group(function () {
 Route::group(['middleware' => 'auth:api'], function () {
   Route::resource('suppliers', SupplierController::class);
   Route::resource('businesses', BusinessController::class);
+  Route::resource('items', BusinessController::class);
 });
