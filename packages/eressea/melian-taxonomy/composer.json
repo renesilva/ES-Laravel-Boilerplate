@@ -1,0 +1,21 @@
+{
+  "name": "eressea/melian-taxonomy",
+  "description": "Melian Taxonomy - Laravel package for taxonomies and terms",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Eressea RS",
+      "email": "rsilva@eresseasolutions.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {},
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Eressea\\MelianTaxonomy\\MelianTaxonomyServiceProvider"
+      ]
+    }
+  }
+}

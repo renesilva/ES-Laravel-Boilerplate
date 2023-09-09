@@ -9,8 +9,11 @@
   "license": "MIT",
   "require": {
     "php": "^8.1",
+    "ext-curl": "*",
     "barryvdh/laravel-dompdf": "^2.0",
+    "eressea/melian-taxonomy": "@dev",
     "guzzlehttp/guzzle": "^7.2",
+    "intervention/image": "^2.7",
     "keboola/csv": "^4.0",
     "kodeine/laravel-meta": "^2.2",
     "lanin/laravel-api-debugger": "^4.0",
@@ -19,10 +22,12 @@
     "laravel/tinker": "^2.8",
     "php-open-source-saver/jwt-auth": "^2.1",
     "phpoffice/phpspreadsheet": "^1.29",
-    "ext-curl": "*"
+    "ext-openssl": "*",
+    "ext-dom": "*"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.13",
+    "bennett-treptow/laravel-migration-generator": "^4.3",
     "fakerphp/faker": "^1.9.1",
     "laravel/pint": "^1.0",
     "laravel/sail": "^1.18",
@@ -35,7 +40,10 @@
     "psr-4": {
       "App\\": "app/",
       "Database\\Factories\\": "database/factories/",
-      "Database\\Seeders\\": "database/seeders/"
+      "Database\\Seeders\\": "database/seeders/",
+      "Eressea\\MelianTaxonomy\\Database\\Seeders\\": "packages/eressea/melian-taxonomy/database/seeders/",
+      "Eressea\\MelianTaxonomy\\": "packages/eressea/melian-taxonomy/src",
+      "Eressea\\MelianHelpers\\": "packages/eressea/melian-helpers/src"
     }
   },
   "autoload-dev": {
@@ -73,5 +81,15 @@
     }
   },
   "minimum-stability": "stable",
-  "prefer-stable": true
+  "prefer-stable": true,
+  "repositories": [
+    {
+      "type": "path",
+      "url": "packages/eressea/melian-taxonomy"
+    },
+    {
+      "type": "path",
+      "url": "packages/eressea/melian-helpers"
+    }
+  ]
 }

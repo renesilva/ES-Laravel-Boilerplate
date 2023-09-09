@@ -4,6 +4,7 @@ use App\Http\Controllers\API\BusinessController;
 use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Examples\FetchDataController;
+use App\Http\Controllers\Examples\TermsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -45,4 +46,5 @@ Route::group(['middleware' => 'auth:api'], function () {
 Route::get('fetchBusinessData', [FetchDataController::class, 'fetchBusinessData']);
 Route::get('fetchBusinessDataGuzzle', [FetchDataController::class, 'fetchBusinessDataGuzzle']);
 Route::post('createBusiness', [FetchDataController::class, 'createBusiness']);
-
+Route::get('addTermToUser/{id}', [TermsController::class, 'addTermToUser']);
+Route::get('getTermsUser/{id}', [TermsController::class, 'getTermsUser']);
