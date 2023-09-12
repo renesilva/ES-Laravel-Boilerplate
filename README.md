@@ -27,7 +27,11 @@ composer install
 
 ## Configuración de .env
 
-Debemos copiar el archivo `.env.example` a `.env`. Una vez copiado podemos generar la llave de la aplicación.
+Debemos copiar el archivo `.env.example` a `.env`.
+```bash
+cp .env.example .env
+```
+Una vez copiado podemos generar la llave de la aplicación.
 
 ```bash
 php artisan key:generate
@@ -57,15 +61,7 @@ php artisan config:cache
 Migramos la base de datos e instalamos los seeds.
 
 ```bash
-php artisan migrate
-```
-
-```bash
-php artisan db:seed --class=UsersSeeder
-```
-
-```bash
-php artisan db:seed --class=SuppliersSeeder
+php artisan migrate --seed
 ```
 
 ## JWT
