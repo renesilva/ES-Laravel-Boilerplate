@@ -19,7 +19,7 @@ El sistema cuenta con los siguientes paquetes
 
 ## Correr composer
 
-Debe correr el siguiente comando para instalar las dependencias de composer.
+Debemos correr el siguiente comando para instalar las dependencias de composer.
 
 ```bash
 composer install
@@ -106,16 +106,21 @@ Recordemos que la configuración de auth.php que utilice el driver de JWT y el G
 
 ## Archivos
 
+Para enlazar la ruta pública http://XXXXXX/storage/ con la carpeta /storage/app/public/ debemos correr el siguiente
+comando
+
 ```bash
 php artisan storage:link
 ```
+
+Debemos correr el siguiente comando para generar las carpetas donde se subirán los archivos.
 
 ```bash
 mkdir -p storage/app/public/business/images
 mkdir storage/app/reports
 ```
 
-Ejemplo de CSV
+Para correr el ejemplo de CSV, debemos correr los siguientes comandos.
 
 ```bash
 mkdir storage/app/examples
@@ -142,10 +147,6 @@ php artisan ide-helper:generate
 ```bash
 php artisan ide-helper:models --write
 ```
-
-# Ejemplo de Suppliers
-
-Tenemos subido el ejemplo de la tabla Suppliers como Controladores, Rutas, Migrations.
 
 # Documentación
 
