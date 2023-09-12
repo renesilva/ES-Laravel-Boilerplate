@@ -21,7 +21,7 @@ class BusinessController extends Controller
 
   public function store(Request $request): JsonResponse
   {
-    $input = $request->only(['name', 'city']);
+    $input = $request->only(['name', 'city', 'logo']);
     $validator = Validator::make($input, [
       'name' => 'required',
       'city' => 'required',
@@ -36,6 +36,12 @@ class BusinessController extends Controller
     } else {
       // no falla
       $business = Business::create($input);
+      if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+        $logoFile = $request->file('logo');
+        $logoFile->store('public/business/images');
+        $business->logo = $logoFile->hashName();
+        $business->save();
+      }
       return response()->json([
         'success' => true,
         'business' => $business,
@@ -76,6 +82,11 @@ class BusinessController extends Controller
     } else {
       $business->name = $input['name'];
       $business->city = $input['city'];
+      if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+        $logoFile = $request->file('logo');
+        $logoFile->store('public/business/images');
+        $business->logo = $logoFile->hashName();
+      }
       $business->save();
       return response()->json([
         'success' => true,

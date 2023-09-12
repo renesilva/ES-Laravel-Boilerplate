@@ -28,9 +28,11 @@ composer install
 ## Configuración de .env
 
 Debemos copiar el archivo `.env.example` a `.env`.
+
 ```bash
 cp .env.example .env
 ```
+
 Una vez copiado podemos generar la llave de la aplicación.
 
 ```bash
@@ -100,6 +102,24 @@ Recordemos que la configuración de auth.php que utilice el driver de JWT y el G
       'provider' => 'users',
     ]
   ],
+```
+
+## Archivos
+
+```bash
+php artisan storage:link
+```
+
+```bash
+mkdir -p storage/app/public/business/images
+mkdir storage/app/reports
+```
+
+Ejemplo de CSV
+
+```bash
+mkdir storage/app/examples
+cp resources/examples/* storage/app/examples
 ```
 
 ## Corriendo el proyecto

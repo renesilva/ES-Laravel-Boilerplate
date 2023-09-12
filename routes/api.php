@@ -3,7 +3,9 @@
 use App\Http\Controllers\API\BusinessController;
 use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Examples\CSVController;
 use App\Http\Controllers\Examples\FetchDataController;
+use App\Http\Controllers\Examples\PDFController;
 use App\Http\Controllers\Examples\TermsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -43,8 +45,12 @@ Route::group(['middleware' => 'auth:api'], function () {
 });
 
 // Example Controllers
-Route::get('fetchBusinessData', [FetchDataController::class, 'fetchBusinessData']);
-Route::get('fetchBusinessDataGuzzle', [FetchDataController::class, 'fetchBusinessDataGuzzle']);
-Route::post('createBusiness', [FetchDataController::class, 'createBusiness']);
+Route::get('examples/fetch-and-create-businesses-curl', [FetchDataController::class, 'fetchBusinessData']);
+Route::get('examples/fetch-and-create-businesses-guzzle', [FetchDataController::class, 'fetchBusinessDataGuzzle']);
+Route::post('examples/create-business-draftbit', [FetchDataController::class, 'createBusinessDraftBit']);
+Route::get('examples/show-items-csv', [CSVController::class, 'showItemsCSV']);
+Route::get('examples/create-temporal-download-pdf', [PDFController::class, 'createTemporalPDF']);
+Route::get('examples/create-temporal-stream-pdf', [PDFController::class, 'createAndStreamPDF']);
+Route::get('examples/create-store-download-pdf', [PDFController::class, 'createAndStorePDF']);
 Route::get('addTermToUser/{id}', [TermsController::class, 'addTermToUser']);
 Route::get('getTermsUser/{id}', [TermsController::class, 'getTermsUser']);

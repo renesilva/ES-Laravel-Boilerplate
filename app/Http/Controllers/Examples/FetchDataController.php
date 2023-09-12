@@ -83,7 +83,7 @@ class FetchDataController extends Controller
    * @param Request $request
    * @return JsonResponse
    */
-  public function createBusiness(Request $request): JsonResponse
+  public function createBusinessDraftBit(Request $request): JsonResponse
   {
     $input = $request->only(['name', 'city']);
     $validator = Validator::make($input, [
