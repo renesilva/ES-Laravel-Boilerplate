@@ -25,6 +25,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
  * @method static \Illuminate\Database\Eloquent\Builder|Business whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Business whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Business whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Business whereLogo($value)
  * @mixin \Eloquent
  */
 class Business extends Model
