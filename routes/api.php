@@ -52,5 +52,5 @@ Route::get('examples/show-items-csv', [CSVController::class, 'showItemsCSV']);
 Route::get('examples/create-temporal-download-pdf', [PDFController::class, 'createTemporalPDF']);
 Route::get('examples/create-temporal-stream-pdf', [PDFController::class, 'createAndStreamPDF']);
 Route::get('examples/create-store-download-pdf', [PDFController::class, 'createAndStorePDF']);
-Route::get('addTermToUser/{id}', [TermsController::class, 'addTermToUser']);
-Route::get('getTermsUser/{id}', [TermsController::class, 'getTermsUser']);
+Route::get('examples/term-add-user-location/{id}', [TermsController::class, 'addTermToUser']);
+Route::get('examples/term-get-user-location/{id}', [TermsController::class, 'getTermsUser']);
