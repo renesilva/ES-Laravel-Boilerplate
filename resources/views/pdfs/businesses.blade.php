@@ -23,7 +23,7 @@
         <td>{{ $business->created_at }}</td>
         <td>
           @if ($business->logo)
-            <img src="{{ storage_path('/app/public/images/'.$business->logo) }}"
+            <img src="{{ storage_path('/app/public/business/images/'.$business->logo) }}"
                  style="max-width: 100px; max-height: 100px; height:auto;"
                  alt="{{ $business->name  }}"/>
           @else
