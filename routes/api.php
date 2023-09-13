@@ -43,18 +43,18 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::resource('suppliers', SupplierController::class);
   Route::resource('businesses', BusinessController::class);
   Route::resource('items', BusinessController::class);
-  // Examples
-  Route::get('examples/assign-role', [PermissionsController::class, 'assignRoleUser']);
-  Route::get('examples/get-role', [PermissionsController::class, 'getRoleUser']);
+  // Ejemplo de asignación de roles
+  // Route::get('examples/assign-role', [PermissionsController::class, 'assignRoleUser']);
+  // Route::get('examples/get-role', [PermissionsController::class, 'getRoleUser']);
 });
 
 // Example Controllers
-Route::get('examples/fetch-and-create-businesses-curl', [FetchDataController::class, 'fetchBusinessData']);
-Route::get('examples/fetch-and-create-businesses-guzzle', [FetchDataController::class, 'fetchBusinessDataGuzzle']);
-Route::post('examples/create-business-draftbit', [FetchDataController::class, 'createBusinessDraftBit']);
-Route::get('examples/show-items-csv', [CSVController::class, 'showItemsCSV']);
-Route::get('examples/create-temporal-download-pdf', [PDFController::class, 'createTemporalPDF']);
-Route::get('examples/create-temporal-stream-pdf', [PDFController::class, 'createAndStreamPDF']);
-Route::get('examples/create-store-download-pdf', [PDFController::class, 'createAndStorePDF']);
-Route::get('examples/term-add-user-location/{id}', [TermsController::class, 'addTermToUser']);
-Route::get('examples/term-get-user-location/{id}', [TermsController::class, 'getTermsUser']);
+// Route::get('examples/fetch-and-create-businesses-curl', [FetchDataController::class, 'fetchBusinessData']);
+// Route::get('examples/fetch-and-create-businesses-guzzle', [FetchDataController::class, 'fetchBusinessDataGuzzle']);
+// Route::post('examples/create-business-draftbit', [FetchDataController::class, 'createBusinessDraftBit']);
+// Route::get('examples/show-items-csv', [CSVController::class, 'showItemsCSV']);
+// Route::get('examples/create-temporal-download-pdf', [PDFController::class, 'createTemporalPDF']);
+// Route::get('examples/create-temporal-stream-pdf', [PDFController::class, 'createAndStreamPDF']);
+// Route::get('examples/create-store-download-pdf', [PDFController::class, 'createAndStorePDF']);
+// Route::get('examples/term-add-user-location/{id}', [TermsController::class, 'addTermToUser']);
+// Route::get('examples/term-get-user-location/{id}', [TermsController::class, 'getTermsUser']);
