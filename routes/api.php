@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\BusinessController;
 use App\Http\Controllers\API\SupplierController;
+use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Examples\CSVController;
 use App\Http\Controllers\Examples\FetchDataController;
@@ -43,9 +44,11 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::resource('suppliers', SupplierController::class);
   Route::resource('businesses', BusinessController::class);
   Route::resource('items', BusinessController::class);
+  Route::resource('users', UserController::class);
   // Ejemplo de asignación de roles
   // Route::get('examples/assign-role', [PermissionsController::class, 'assignRoleUser']);
   // Route::get('examples/get-role', [PermissionsController::class, 'getRoleUser']);
+  // Route::get('examples/set-roles-user-objects', [PermissionsController::class, 'setRolesUsersObjects']);
 });
 
 // Example Controllers
