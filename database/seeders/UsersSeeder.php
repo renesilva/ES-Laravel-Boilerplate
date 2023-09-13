@@ -14,6 +14,7 @@ class UsersSeeder extends Seeder
    */
   public function run(): void
   {
+    // Test user para revisar funcionalidad una vez iniciada la sesión
     DB::table('users')->insert([
       'name' => 'Test User',
       'email' => 'test@test.com',
@@ -21,5 +22,6 @@ class UsersSeeder extends Seeder
       'created_at' => now(),
       'updated_at' => now(),
     ]);
+    
   }
 }

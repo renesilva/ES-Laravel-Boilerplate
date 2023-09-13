@@ -10,6 +10,8 @@
   "require": {
     "php": "^8.1",
     "ext-curl": "*",
+    "ext-dom": "*",
+    "ext-openssl": "*",
     "barryvdh/laravel-dompdf": "^2.0",
     "eressea/melian-taxonomy": "@dev",
     "guzzlehttp/guzzle": "^7.2",
@@ -22,8 +24,7 @@
     "laravel/tinker": "^2.8",
     "php-open-source-saver/jwt-auth": "^2.1",
     "phpoffice/phpspreadsheet": "^1.29",
-    "ext-openssl": "*",
-    "ext-dom": "*"
+    "spatie/laravel-permission": "^5.11"
   },
   "require-dev": {
     "barryvdh/laravel-ide-helper": "^2.13",

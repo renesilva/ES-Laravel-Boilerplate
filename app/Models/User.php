@@ -6,8 +6,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Kodeine\Metable\Metable;
 use PHPOpenSourceSaver\JWTAuth\Contracts\JWTSubject;
 use Eressea\MelianTaxonomy\Traits\RelationshipTrait;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * App\Models\User
@@ -36,11 +38,21 @@ use Eressea\MelianTaxonomy\Traits\RelationshipTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|User wherePassword($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Kodeine\Metable\MetaData> $metas
+ * @property-read int|null $metas_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Permission> $permissions
+ * @property-read int|null $permissions_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \Spatie\Permission\Models\Role> $roles
+ * @property-read int|null $roles_count
+ * @method static \Illuminate\Database\Eloquent\Builder|User meta($alias = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
+ * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereMeta($key, $value, $alias = null)
  * @mixin \Eloquent
  */
 class User extends Authenticatable implements JWTSubject
 {
-  use HasFactory, Notifiable, RelationshipTrait;
+  use HasFactory, Notifiable, RelationshipTrait, HasRoles, Metable;
 
   /**
    * The attributes that are mass assignable.

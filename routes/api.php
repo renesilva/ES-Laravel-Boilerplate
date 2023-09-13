@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Examples\CSVController;
 use App\Http\Controllers\Examples\FetchDataController;
 use App\Http\Controllers\Examples\PDFController;
+use App\Http\Controllers\Examples\PermissionsController;
 use App\Http\Controllers\Examples\TermsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -42,6 +43,9 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::resource('suppliers', SupplierController::class);
   Route::resource('businesses', BusinessController::class);
   Route::resource('items', BusinessController::class);
+  // Examples
+  Route::get('examples/assign-role', [PermissionsController::class, 'assignRoleUser']);
+  Route::get('examples/get-role', [PermissionsController::class, 'getRoleUser']);
 });
 
 // Example Controllers
