@@ -31,20 +31,90 @@ class SistemaRecibosInit extends Command
       'class' => 'SistemaRecibosSeeder',
     ]);
     $this->call('permission:create-role', ['name' => 'super-admin', 'guard' => 'api']);
+
+    $globalPermissions = [
+      'view businesses', //listado
+      'view business', //singular
+      'create business',
+      'delete business',
+    ];
+
+    $businessManagerPermissions = [
+      'edit business',
+      'view projects',
+      'view project',
+      'create project',
+      'edit project',
+      'delete project',
+      'view items',
+      'view item',
+      'create item',
+      'edit item',
+      'delete item',
+      'view receipts',
+      'view receipt',
+      'create receipt',
+      'edit receipt',
+      'delete receipt',
+      'view suppliers',
+      'view supplier',
+      'create supplier',
+      'edit supplier',
+      'delete supplier',
+      'assign items',
+    ];
     $this->call('permission:create-role', [
       'name' => 'business-manager',
       'guard' => 'api',
-      'permissions' => "edit business|create projects|edit projects|delete projects|create items|edit items|delete items|create receipts|edit receipts|delete receipts|create suppliers|edit suppliers|delete suppliers|assign items"
+      'permissions' => implode('|', $businessManagerPermissions),
     ]);
+    $projectManagerPermissions = [
+      'view projects',
+      'view project',
+      'edit project',
+      'view items',
+      'view item',
+      'create item',
+      'edit item',
+      'delete item',
+      'view receipts',
+      'view receipt',
+      'create receipt',
+      'edit receipt',
+      'delete receipt',
+      'view suppliers',
+      'view supplier',
+      'create supplier',
+      'edit supplier',
+      'delete supplier',
+      'assign items',
+    ];
     $this->call('permission:create-role', [
       'name' => 'project-manager',
       'guard' => 'api',
-      'permissions' => "edit projects|create items|edit items|delete items|create receipts|edit receipts|delete receipts|create suppliers|edit suppliers|delete suppliers|assign items"
+      'permissions' => implode('|', $projectManagerPermissions),
     ]);
+    $executorPermissions = [
+      'view items',
+      'view item',
+      'create item',
+      'edit item',
+      'delete item',
+      'view receipts',
+      'view receipt',
+      'create receipt',
+      'edit receipt',
+      'delete receipt',
+      'view suppliers',
+      'view supplier',
+      'create supplier',
+      'edit supplier',
+      'delete supplier',
+    ];
     $this->call('permission:create-role', [
       'name' => 'executor',
       'guard' => 'api',
-      'permissions' => "create items|edit items|delete items|create receipts|edit receipts|delete receipts|create suppliers|edit suppliers|delete suppliers"
+      'permissions' => implode('|', $executorPermissions),
     ]);
 
     // Asignamos roles
