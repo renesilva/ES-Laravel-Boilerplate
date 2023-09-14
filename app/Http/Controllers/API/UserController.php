@@ -7,6 +7,7 @@ use App\Models\RolesUsersObjects;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -27,18 +28,52 @@ class UserController extends Controller
 
   public function store(Request $request): JsonResponse
   {
-    return response()->json([
-      'success' => false,
-      'message' => 'You are not authorized to access this resource',
-    ])->setStatusCode(401);
+    $input = $request->only(['name', 'email', 'password']);
+    $validator = Validator::make($input, [
+      'name' => 'required',
+      'email' => 'required',
+      'password' => 'required',
+    ]);
+    if ($validator->fails()) {
+      // falla
+      return response()->json([
+        'success' => false,
+        'message' => 'Validation error',
+        'errors' => $validator->errors(),
+      ])->setStatusCode(400);
+    } else {
+      // no falla
+      $user = User::create($input);
+      if ($input['password'] != '') {
+        $user->password = Hash::make(json_decode($input['password']));
+        $user->save();
+      } else {
+        return response()->json([
+          'success' => false,
+          'message' => 'Password is required'
+        ])->setStatusCode(400);
+      }
+      return response()->json([
+        'success' => true,
+        'user' => $user,
+      ]);
+    }
   }
 
   public function show(string $id): JsonResponse
   {
-    return response()->json([
-      'success' => false,
-      'message' => 'You are not authorized to access this resource',
-    ])->setStatusCode(401);
+    $user = User::find($id);
+    if (is_null($user)) {
+      return response()->json([
+        'success' => false,
+        'message' => 'User not found',
+      ])->setStatusCode(404);
+    } else {
+      return response()->json([
+        'success' => true,
+        'user' => $user,
+      ]);
+    }
   }
 
   /**
@@ -103,9 +138,10 @@ class UserController extends Controller
 
   public function destroy(User $user): JsonResponse
   {
+    $user->delete();
     return response()->json([
-      'success' => false,
-      'message' => 'You are not authorized to access this resource',
-    ])->setStatusCode(401);
+      'success' => true,
+      'message' => 'User deleted',
+    ]);
   }
 }
