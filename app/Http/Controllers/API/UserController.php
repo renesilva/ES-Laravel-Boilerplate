@@ -72,8 +72,19 @@ class UserController extends Controller
         'success' => false,
         'message' => 'Validation error',
         'errors' => $validator->errors(),
-      ])->setStatusCode(401);
+      ])->setStatusCode(400);
     } else {
+      // check if email is unique
+      $user_with_email = User::where('email', $input['email'])->first();
+      if ($user_with_email) {
+        if ($user_with_email->id != $user->id) {
+          return response()->json([
+            'success' => false,
+            'message' => 'Validation error',
+            'errors' => ['email' => ['The email has already been taken.']],
+          ])->setStatusCode(422);
+        }
+      }
       //fields
       $user->name = $input['name'];
       $user->email = $input['email'];
@@ -84,7 +95,7 @@ class UserController extends Controller
       $user->refresh();
       return response()->json([
         'success' => true,
-        'message' => 'Success!',
+        'message' => 'User updated successfully',
         'user' => $user,
       ]);
     }
