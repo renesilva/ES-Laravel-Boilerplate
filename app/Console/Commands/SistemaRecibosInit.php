@@ -40,6 +40,7 @@ class SistemaRecibosInit extends Command
     ];
 
     $businessManagerPermissions = [
+      'view business',
       'edit business',
       'view projects',
       'view project',

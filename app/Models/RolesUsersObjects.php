@@ -114,6 +114,33 @@ class RolesUsersObjects extends Model
 
   }
 
+  /**
+   * @param User $user
+   * @param string $object_class
+   * @param int $object_id
+   * @param int $role_id
+   * @return bool
+   */
+  public static function userCan(
+    User   $user,
+    string $object_class,
+    int    $object_id,
+    int    $role_id
+  ): bool
+  {
+    $roles = $user->rolesUsersObjects;
+    foreach ($roles as $role) {
+      if (
+        $role->object_class == $object_class &&
+        $role->object_id == $object_id &&
+        $role->role_id == $role_id
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public static function convertToString($roles_objects): string
   {
     return http_build_query((array)$roles_objects);

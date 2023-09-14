@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Validator;
 
 class BusinessController extends Controller
 {
+  public function __construct()
+  {
+    $this->authorizeResource(Business::class, 'business');
+  }
+
   public function index(): JsonResponse
   {
     $businesses = Business::all();
@@ -49,20 +54,13 @@ class BusinessController extends Controller
     }
   }
 
-  public function show(string $id): JsonResponse
+  public function show(Business $business): JsonResponse
   {
-    $business = Business::find($id);
-    if (is_null($business)) {
-      return response()->json([
-        'success' => false,
-        'message' => 'Business not found',
-      ])->setStatusCode(404);
-    } else {
-      return response()->json([
-        'success' => true,
-        'business' => $business,
-      ]);
-    }
+    // $this->authorize('view business', BusinessPolicy::class);
+    return response()->json([
+      'success' => true,
+      'business' => $business,
+    ]);
   }
 
 

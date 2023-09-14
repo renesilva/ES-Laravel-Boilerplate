@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\BusinessController;
+use App\Http\Controllers\API\MyProfile;
 use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
@@ -45,6 +46,7 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::resource('businesses', BusinessController::class);
   Route::resource('items', BusinessController::class);
   Route::resource('users', UserController::class);
+  Route::get('user/get-profile', [MyProfile::class, 'getProfile']);
   // Ejemplo de asignación de roles
   // Route::get('examples/assign-role', [PermissionsController::class, 'assignRoleUser']);
   // Route::get('examples/get-role', [PermissionsController::class, 'getRoleUser']);
