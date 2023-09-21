@@ -14,13 +14,11 @@ class MyProfile extends Controller
   {
     $user = User::find(Auth::user()->id);
     $roles = $user->roles;
-    $roles_users_objects = $user->rolesUsersObjects;
 
     return response()->json([
       'success' => true,
       'user' => $user,
       'roles' => $roles,
-      'roles_users_objects' => $roles_users_objects,
     ]);
   }
 }

@@ -127,6 +127,23 @@ mkdir storage/app/examples
 cp resources/examples/* storage/app/examples
 ```
 
+## Sistema de Ejemplo de Usuarios (Opcional)
+
+El sistema utiliza el paquete de [Laravel Permission](https://spatie.be/docs/laravel-permission/v5/introduction) para
+manejar los roles y permisos de los usuarios.
+
+Creamos los roles de:
+
+- superadmin. El Super Admin administrará usuarios.
+- admin. Dejamos en blanco para que puedan adicionar características.
+
+Con el siguiente comando creamos los siguientes permisos y los asignamos a los roles. Estamos utilizando el guard _api_
+para los permisos.
+
+```bash
+php artisan app:user-examples-init
+```
+
 ## Corriendo el proyecto
 
 Para ejecutar proyecto debes correr el siguiente comando:

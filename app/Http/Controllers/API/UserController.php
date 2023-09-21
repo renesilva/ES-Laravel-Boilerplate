@@ -3,17 +3,20 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\RolesUsersObjects;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
+/**
+ * Esta clase administra usuarios.
+ */
 class UserController extends Controller
 {
   public function __construct()
   {
+    // Solamente el super-admin puede acceder a este controlador
     $this->middleware(['role:super-admin']);
   }
 
@@ -76,28 +79,10 @@ class UserController extends Controller
     }
   }
 
-  /**
-   * Ejemplo
-   *
-   * {
-   * "name": "abc",
-   * "email": "superadmin@test.com",
-   * "roles_users_objects": [
-   * {
-   * "role_id": 1,
-   * "object_id": 1,
-   * "object_class": "App\\Models\\Business"
-   * }
-   * ]
-   * }
-   *
-   * @param Request $request
-   * @param User $user
-   * @return JsonResponse
-   */
+
   public function update(Request $request, User $user): JsonResponse
   {
-    $input = $request->only(['name', 'email', 'roles_users_objects']);
+    $input = $request->only(['name', 'email']);
     $validator = Validator::make($input, [
       'name' => 'required',
       'email' => 'email|required',
@@ -125,8 +110,6 @@ class UserController extends Controller
       $user->email = $input['email'];
       //save
       $user->save();
-      //roles
-      RolesUsersObjects::setRolesUsersObjects($input['roles_users_objects'], $user);
       $user->refresh();
       return response()->json([
         'success' => true,
@@ -144,5 +127,5 @@ class UserController extends Controller
       'message' => 'User deleted',
     ]);
   }
-  
+
 }
