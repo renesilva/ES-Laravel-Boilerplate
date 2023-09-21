@@ -127,29 +127,6 @@ mkdir storage/app/examples
 cp resources/examples/* storage/app/examples
 ```
 
-## Roles para Sistema de Recibos
-
-El sistema utiliza el paquete de [Laravel Permission](https://spatie.be/docs/laravel-permission/v5/introduction) para
-manejar los roles y permisos de los usuarios.
-
-Creamos los roles de:
-
-- superadmin. El Super Admin, organizará los negocios, su administración y gestionará todas las tareas en
-  general.
-- business-manager. Los administradores de negocio, serán los encargados de crear cada uno de los proyectos y
-  asignarle un administrador para la organización de cada tarea específica.
-- project-manager. Los administradores de cada proyecto, tendrán la facultad de aprobar o rechazar los recibos
-  que se presentan y también de crear los ítems necesarios para cada tarea ejecutada.
-- executor. Los ejecutores serán los encargados de realizar las tareas específicas (items)  dentro de cada proceso de
-  inversión.
-
-Con el siguiente comando creamos los siguientes permisos y los asignamos a los roles. Estamos utilizando el guard _api_
-para los permisos.
-
-```bash
-php artisan app:sistema-recibos-init
-```
-
 ## Corriendo el proyecto
 
 Para ejecutar proyecto debes correr el siguiente comando:
