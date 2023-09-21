@@ -49,7 +49,6 @@ use Spatie\Permission\Traits\HasRoles;
  * @method static \Illuminate\Database\Eloquent\Builder|User permission($permissions)
  * @method static \Illuminate\Database\Eloquent\Builder|User role($roles, $guard = null)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereMeta($key, $value, $alias = null)
- * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\RolesUsersObjects> $rolesUsersObjects
  * @property-read int|null $roles_users_objects_count
  * @mixin \Eloquent
  */
@@ -98,8 +97,4 @@ class User extends Authenticatable implements JWTSubject
     return [];
   }
 
-  public function rolesUsersObjects(): HasMany
-  {
-    return $this->hasMany(RolesUsersObjects::class);
-  }
 }
