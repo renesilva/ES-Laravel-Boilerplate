@@ -144,6 +144,21 @@ para los permisos.
 php artisan app:user-examples-init
 ```
 
+## Tests
+
+Debemos copiar el archivo `.env` a `.env.testing`.
+
+```bash
+cp .env .env.testing
+```
+
+Y en `.env.testing` configurar la base de datos de pruebas.
+
+```
+DB_CONNECTION=sqlite
+DB_DATABASE=':memory:'
+```
+
 ## Corriendo el proyecto
 
 Para ejecutar proyecto debes correr el siguiente comando:
