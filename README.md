@@ -159,6 +159,18 @@ DB_CONNECTION=sqlite
 DB_DATABASE=':memory:'
 ```
 
+Y borrar toda la configuración
+
+```bash
+php artisan config:clear
+```
+
+Para correr los tests debemos correr el siguiente comando.
+
+```bash
+php artisan test
+```
+
 ## Corriendo el proyecto
 
 Para ejecutar proyecto debes correr el siguiente comando:
