@@ -17,7 +17,11 @@ class UserController extends Controller
   public function __construct()
   {
     // Solamente el super-admin puede acceder a este controlador
-    $this->middleware(['role:super-admin']);
+    // Ejemplo:
+    // $this->middleware(['role:super-admin']);
+
+    // Utilizamos las Policies de UserPolicy
+    $this->authorizeResource(User::class, 'user');
   }
 
   public function index(): JsonResponse
@@ -38,14 +42,21 @@ class UserController extends Controller
       'password' => 'required',
     ]);
     if ($validator->fails()) {
-      // falla
       return response()->json([
         'success' => false,
         'message' => 'Validation error',
         'errors' => $validator->errors(),
       ])->setStatusCode(400);
     } else {
-      // no falla
+      $userDuplicateEmail = User::where('email', $input['email'])->first();
+      if ($userDuplicateEmail) {
+        return response()->json([
+          'success' => false,
+          'message' => 'Validation error',
+          'errors' => ['email' => ['The email has already been taken.']],
+        ])->setStatusCode(422);
+      }
+
       $user = User::create($input);
       if ($input['password'] != '') {
         $user->password = Hash::make(json_decode($input['password']));
@@ -59,7 +70,7 @@ class UserController extends Controller
       return response()->json([
         'success' => true,
         'user' => $user,
-      ]);
+      ])->setStatusCode(201);
     }
   }
 
@@ -125,7 +136,7 @@ class UserController extends Controller
     return response()->json([
       'success' => true,
       'message' => 'User deleted',
-    ]);
+    ])->setStatusCode(204);
   }
 
 }

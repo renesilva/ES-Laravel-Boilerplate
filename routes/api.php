@@ -1,8 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\BusinessController;
 use App\Http\Controllers\API\MyProfile;
-use App\Http\Controllers\API\SupplierController;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Examples\CSVController;
@@ -42,7 +40,9 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
+  // Super Admin Only
   Route::resource('users', UserController::class);
+  // All users
   Route::get('user/get-profile', [MyProfile::class, 'getProfile']);
   // Ejemplo de asignación de roles
   // Route::get('examples/assign-role', [PermissionsController::class, 'assignRoleUser']);
