@@ -1,0 +1,27 @@
+stages:
+  - test
+
+unit_test:
+  stage: test
+  image: spryker/php:8.1
+  cache:
+    paths:
+      - vendor/
+  before_script:
+    - apk add openssh-client
+  script:
+    - php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+    - php composer-setup.php
+    - php -r "unlink('composer-setup.php');"
+    - php composer.phar install
+    - cp .env.example .env
+    - php artisan key:generate
+    - php artisan jwt:secret
+    - cp .env .env.testing
+    - sed -i 's/mysql/sqlite/g' .env.testing
+    - sed -i "s/DB_DATABASE=laravel/DB_DATABASE=':memory:'/g" .env.testing
+    - php artisan config:clear
+    - vendor/bin/phpunit
+  tags:
+    - docker
+
