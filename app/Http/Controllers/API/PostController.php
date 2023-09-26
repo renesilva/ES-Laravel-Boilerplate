@@ -4,63 +4,95 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+  public function __construct()
+  {
+    $this->authorizeResource(Post::class, 'post');
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
+  /**
+   * El super-admin puede ver todos los posts, el autor solamente los suyos
+   * @return JsonResponse
+   */
+  public function index(): JsonResponse
+  {
+    $currentUser = User::find(Auth::user()->id);
+    // para super-admin
+    if ($currentUser->hasRole('super-admin')) {
+      return response()->json([
+        'success' => true,
+        'message' => 'Posts fetched successfully',
+        'posts' => Post::all()
+      ]);
     }
+    // para admin
+    $posts = Post::where('user_id', $currentUser->id)->get();
+    return response()->json([
+      'success' => true,
+      'message' => 'Posts fetched successfully',
+      'posts' => $posts
+    ]);
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Post $post)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Post $post)
-    {
-        //
+  public function store(Request $request): JsonResponse
+  {
+    $input = $request->only(['title', 'content', 'slug']);
+    $validator = Validator::make($input, [
+      'title' => 'required',
+      'content' => 'required',
+      'slug' => 'required',
+    ]);
+    if ($validator->fails()) {
+      // falla
+      return response()->json([
+        'success' => false,
+        'message' => 'Validation error',
+        'errors' => $validator->errors(),
+      ])->setStatusCode(400);
+    } else {
+      // no falla
+      $input['user_id'] = Auth::user()->id;
+      $post = Post::create($input);
+      return response()->json([
+        'success' => true,
+        'post' => $post,
+      ])->setStatusCode(201);
     }
+  }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
-    }
+  public function show(Post $post): JsonResponse
+  {
+    return response()->json([
+      'success' => true,
+      'message' => 'Post fetched successfully',
+      'post' => $post,
+    ]);
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Post $post)
-    {
-        //
-    }
+
+  public function update(Request $request, Post $post): JsonResponse
+  {
+    return response()->json([
+      'success' => true,
+      'message' => 'Post updated successfully',
+    ]);
+  }
+
+  public function destroy(Post $post): JsonResponse
+  {
+    $post->delete();
+    return response()->json([
+      'success' => true,
+      'message' => 'Post deleted successfully',
+    ])->setStatusCode(204);
+  }
 }

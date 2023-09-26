@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth:api'], function () {
   Route::resource('users', UserController::class);
   // All users
   Route::get('user/get-profile', [MyProfile::class, 'getProfile']);
+  // Posts
+  Route::resource('posts', \App\Http\Controllers\API\PostController::class);
   // Ejemplo de asignación de roles
   // Route::get('examples/assign-role', [PermissionsController::class, 'assignRoleUser']);
   // Route::get('examples/get-role', [PermissionsController::class, 'getRoleUser']);
