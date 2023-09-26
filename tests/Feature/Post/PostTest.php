@@ -47,6 +47,27 @@ class PostTest extends TestCase
     $responseCreate->assertStatus(403);
   }
 
+  public function testAdminEditsPost(): void
+  {
+    $admin = $this->newUser(['admin']);
+    $responseCreate = $this->createPost($admin);
+    $responseCreate->assertStatus(201);
+    $responseEdit = $this->actingAs($admin)->put(
+      '/api/posts/' . $responseCreate->json()['post']['id'],
+      [
+        'title' => 'Test post edited',
+        'content' => 'Test content edited',
+        'slug' => 'test-title-edited',
+      ]
+    );
+    $responseEdit->assertStatus(200);
+    $this->assertDatabaseHas('posts', [
+      'title' => 'Test post edited',
+      'content' => 'Test content edited',
+      'slug' => 'test-title-edited',
+    ]);
+  }
+
   public function testAdminDeletesPost(): void
   {
     $admin = $this->newUser(['admin']);

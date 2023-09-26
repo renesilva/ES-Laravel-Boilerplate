@@ -39,7 +39,7 @@ class CommentTest extends TestCase
       'name' => 'Jessica Archer',
     ]);
     $response = $this->postJson(
-      '/api/comments',
+      '/comments',
       [
         'name' => 'Jessica Archer',
         'comment' => 'Comentario de prueba',

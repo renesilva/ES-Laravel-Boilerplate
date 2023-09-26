@@ -42,7 +42,6 @@ class PostController extends Controller
     ]);
   }
 
-
   public function store(Request $request): JsonResponse
   {
     $input = $request->only(['title', 'content', 'slug']);
@@ -81,10 +80,29 @@ class PostController extends Controller
 
   public function update(Request $request, Post $post): JsonResponse
   {
-    return response()->json([
-      'success' => true,
-      'message' => 'Post updated successfully',
+    $input = $request->only(['title', 'content', 'slug']);
+    $validator = Validator::make($input, [
+      'title' => 'required',
+      'content' => 'required',
+      'slug' => 'required',
     ]);
+    if ($validator->fails()) {
+      // falla
+      return response()->json([
+        'success' => false,
+        'message' => 'Validation error',
+        'errors' => $validator->errors(),
+      ])->setStatusCode(400);
+    } else {
+      // no falla
+      $input['user_id'] = Auth::user()->id;
+      $post->update($input);
+      return response()->json([
+        'success' => true,
+        'post' => $post,
+        'message' => 'Post updated successfully',
+      ])->setStatusCode(200);
+    }
   }
 
   public function destroy(Post $post): JsonResponse
