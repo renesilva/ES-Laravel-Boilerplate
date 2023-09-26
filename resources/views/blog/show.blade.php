@@ -3,7 +3,8 @@
   <h1>{{$post->title}}</h1>
   <p>{{$post->content}}</p>
   <h2>Comentarios</h2>
-  <form action="{{url('/api/comments')}}" method="POST">
+  <form action="{{url('/comments')}}" method="POST">
+    @csrf
     <div class="mb-3">
       <label for="name" class="form-label">Nombre</label>
       <input type="text" class="form-control" id="name" name="name">
