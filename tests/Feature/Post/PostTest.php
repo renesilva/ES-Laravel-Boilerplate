@@ -2,9 +2,8 @@
 
 namespace Tests\Feature\Post;
 
-use App\Models\Post;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Storage;
 use Tests\Feature\User\UserTestFunctions;
 use Tests\TestCase;
 
@@ -32,6 +31,10 @@ class PostTest extends TestCase
     $admin = $this->newUser(['admin']);
     $responseCreate = $this->createPost($admin);
     $responseCreate->assertStatus(201);
+    // Revisamos sis existe el archivo en el disco
+    Storage::disk('public')->assertExists(
+      'posts/images/' . $responseCreate->json()['post']['thumbnail']
+    );
 
     $this->assertDatabaseHas('posts', [
       'title' => 'Test post',

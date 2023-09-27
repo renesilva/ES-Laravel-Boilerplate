@@ -117,6 +117,7 @@ Debemos correr el siguiente comando para generar las carpetas donde se subirán 
 
 ```bash
 mkdir -p storage/app/public/business/images
+mkdir -p storage/app/public/posts/images
 mkdir storage/app/reports
 ```
 

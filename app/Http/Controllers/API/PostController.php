@@ -44,23 +44,28 @@ class PostController extends Controller
 
   public function store(Request $request): JsonResponse
   {
-    $input = $request->only(['title', 'content', 'slug']);
+    $input = $request->only(['title', 'content', 'slug', 'thumbnail']);
     $validator = Validator::make($input, [
       'title' => 'required',
       'content' => 'required',
       'slug' => 'required',
     ]);
     if ($validator->fails()) {
-      // falla
       return response()->json([
         'success' => false,
         'message' => 'Validation error',
         'errors' => $validator->errors(),
       ])->setStatusCode(400);
     } else {
-      // no falla
       $input['user_id'] = Auth::user()->id;
       $post = Post::create($input);
+      // thumbnail upload
+      if ($request->hasFile('thumbnail') && $request->file('thumbnail')->isValid()) {
+        $logoFile = $request->file('thumbnail');
+        $logoFile->store('public/posts/images');
+        $post->thumbnail = $logoFile->hashName();
+        $post->save();
+      }
       return response()->json([
         'success' => true,
         'post' => $post,
@@ -80,23 +85,28 @@ class PostController extends Controller
 
   public function update(Request $request, Post $post): JsonResponse
   {
-    $input = $request->only(['title', 'content', 'slug']);
+    $input = $request->only(['title', 'content', 'slug', 'thumbnail']);
     $validator = Validator::make($input, [
       'title' => 'required',
       'content' => 'required',
       'slug' => 'required',
     ]);
     if ($validator->fails()) {
-      // falla
       return response()->json([
         'success' => false,
         'message' => 'Validation error',
         'errors' => $validator->errors(),
       ])->setStatusCode(400);
     } else {
-      // no falla
       $input['user_id'] = Auth::user()->id;
       $post->update($input);
+      // thumbnail upload
+      if ($request->hasFile('thumbnail') && $request->file('thumbnail')->isValid()) {
+        $logoFile = $request->file('thumbnail');
+        $logoFile->store('public/posts/images');
+        $post->thumbnail = $logoFile->hashName();
+        $post->save();
+      }
       return response()->json([
         'success' => true,
         'post' => $post,
