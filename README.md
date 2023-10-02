@@ -113,13 +113,6 @@ comando
 php artisan storage:link
 ```
 
-Debemos correr el siguiente comando para generar las carpetas donde se subirán los archivos.
-
-```bash
-mkdir -p storage/app/public/business/images
-mkdir storage/app/reports
-```
-
 Para correr el ejemplo de CSV, debemos correr los siguientes comandos.
 
 ```bash
@@ -146,20 +139,7 @@ php artisan app:user-examples-init
 
 ## Tests
 
-Debemos copiar el archivo `.env` a `.env.testing`.
-
-```bash
-cp .env .env.testing
-```
-
-Y en `.env.testing` configurar la base de datos de pruebas.
-
-```
-DB_CONNECTION=sqlite
-DB_DATABASE=':memory:'
-```
-
-Y borrar toda la configuración
+Verifiquemos que el archivo phpunit.xml se encuentre creado y debemos borrar la configuración con:
 
 ```bash
 php artisan config:clear
