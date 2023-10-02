@@ -26,7 +26,7 @@ class UsersExamplesSeeder extends Seeder
     // Test user para revisar funcionalidad una vez iniciada la sesión
     DB::table('users')->insert([
       'name' => 'Test User',
-      'email' => 'rsilva@eresseasolutions.com',
+      'email' => 'test@test.com',
       'password' => Hash::make('password'),
       'created_at' => now(),
       'updated_at' => now(),
