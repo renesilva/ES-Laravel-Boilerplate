@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
+});
+
+Route::get('auth/password/reset/{token}', function (string $token = '') {
+  return view('auth.password_reset', ['token' => $token]);
+})->name('password.reset');
+
+Route::post('auth/password/reset', [AuthController:: class, 'passwordReset']);
+
+Route::get('/auth/password/reset', function (string $token = '') {
+  return view('auth.password_reset', ['token' => $token]);
 });

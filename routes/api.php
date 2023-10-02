@@ -37,6 +37,7 @@ Route::controller(AuthController::class)->group(function () {
   Route::post('auth/login', 'login');
   Route::post('auth/logout', 'logout');
   Route::post('auth/refresh', 'refresh');
+  Route::post('auth/forgot-password', 'forgotPassword');
 });
 
 Route::group(['middleware' => 'auth:api'], function () {
@@ -60,3 +61,4 @@ Route::group(['middleware' => 'auth:api'], function () {
 // Route::get('examples/create-store-download-pdf', [PDFController::class, 'createAndStorePDF']);
 // Route::get('examples/term-add-user-location/{id}', [TermsController::class, 'addTermToUser']);
 // Route::get('examples/term-get-user-location/{id}', [TermsController::class, 'getTermsUser']);
+
